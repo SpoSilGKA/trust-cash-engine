@@ -1,14 +1,13 @@
-markdown
 # Trust & Custodial Cash-Sweep Optimization Engine
 
 ## Project Overview
-This project provides a localized proof-of-concept (POC) for a **Trust & Custodial Cash Management and Fixed-Income Roll Engine**. It simulates an enterprise-level wealth management system designed to systematically eliminate idle cash drag while enforcing strict fiduciary risk boundaries. 
+This project provides a localized proof-of-concept (POC) for a **Trust & Custodial Cash Management and Fixed-Income Roll Engine**. It simulates an enterprise-level wealth management system (mirroring a cash management solution, devised and implemented, during my tenure at Chase Manhattan Bank) designed to systematically eliminate idle cash drag while enforcing strict fiduciary risk boundaries. 
 
 The architecture demonstrates a comprehensive, cross-platform design. It pairs a **Core Transactional Ledger Layer (MUMPS)** with a **Modern Analytics Layer (T-SQL)**, showcasing how data seamlessly moves from high-throughput transactional backends to relational reporting warehouses.
 
 ---
 
-## Part 1: Relational Analytics Layer (T-SQL Executive Summary)
+## Part 1: Relational Analytics Layer (T-SQL Executive Summary as well as SQL dialects: Oracle PS/SQL; PostgreSQL; MySQL)
 
 ### 1. The Operational Problem
 Manually managing idle cash and maturing short-term Treasury positions across a large book of Trust and Custodial accounts creates two compounding costs:
@@ -47,11 +46,10 @@ To prove full system portability, the exact financial and compliance logic was t
 * **`$DATA` Compliance Safety Net:** Serves as the direct structural equivalent of the T-SQL `LEFT JOIN`. The `$DATA` function explicitly checks if the `^Rules(FiduciaryType)` node exists. If it returns 0, the program immediately halts execution for that account and branches to a `COMPLIANCE_HOLD` state.
 * **Null Value Mapping:** Setting `DailyYieldLift=""` (the closest MUMPS native equivalent to a relational database `NULL`) guarantees that blocked accounts remain visually and systematically distinct from legitimate zero-balance accounts.
 
-markdown
 ### 2. Live System Architecture & Technical Stack
 The production-ready proof of concept is deployed across a containerized, hybrid-OS data pipeline, separating transactional recording from executive BI reporting:
 
-Use code with caution.
+
 
 ┌──────────────────────────────────────┐
 │ CORE TRANSACTION TIER │ --> Runs on Core Systems
